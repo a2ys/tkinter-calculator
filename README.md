@@ -1,0 +1,2 @@
+# tkinter-calculator
+I am working on a small project - 'Tkinter Calculator'. I am currently working on it, and giving it basic functionality every calculator software has. When this project will complete, I will not maintain its source code but it will always be open-source. After this project will complete, I will work on a more advanced version of the calculator, a 'Scientific Calculator'. For that, I need a small team of 2-3 people that will work for no profit and be co-operative. For the time being, enjoy an incomplete version of the calculator in development.
