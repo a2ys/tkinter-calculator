@@ -58,7 +58,7 @@ def gsc():
     label = Label(window, image=img).pack(padx=10, pady=10)
 
 def atp():
-    messagebox.showinfo('ABOUT THE PROJECT', 'Hey, I\'m Aayush Shukla and this is a small project - \'Tkinter Calculator\'. I  gave it the basic functionalities every calculator software has (with some known issues mentioned in my GitHub). I started working on this project on 11th of November, 2021 and completed it on 20th of November, 2021. I am not currently maintaining the source code but it will always be freely available on GitHub as an open-source project and will be always open to your contributions.')
+    messagebox.showinfo('ABOUT THE PROJECT', 'Hey, I\'m Aayush Shukla and this is a small project - \'Tkinter Calculator\'. I gave it the basic functionalities every calculator software has (with some known issues mentioned in my GitHub). I started working on this project on 11th of November, 2021 and completed it on 20th of November, 2021. I am not currently maintaining the source code but it will always be freely available on GitHub as an open-source project and will be always open to your contributions.')
 
 comwindow = Menu(menubar, tearoff=0)
 comwindow.add_command(label="Quit", command=qclick)
