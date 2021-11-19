@@ -2,8 +2,8 @@
 
 from tkinter import *
 from tkinter import font as tkFont
-from tkinter import messagebox
-import time
+from tkinter import messagebox, Toplevel
+from PIL import ImageTk, Image
 
 root = Tk()
 root.geometry('700x600')
@@ -12,18 +12,63 @@ root.grid_columnconfigure((0,1,2,3), weight=1)
 root.title("CALCULATOR")
 root.resizable(False, False)
 
+vartemp = StringVar()
+vartemp.set('The source code is available on GitHub.\nPress the button below to copy the link.')
+path = 'frame.png'
+img = ImageTk.PhotoImage(Image.open(path))
+
 menubar = Menu(root)
 
+cfnt = tkFont.Font(family='Segoe UI', size=11)
+
+def qclick():
+    mb = messagebox.askyesno('QUITTING', 'Are you sure you want to quit the application?')
+
+    if mb == True:
+        root.quit()
+    else:
+        pass
+
+def copylink():
+    global vartemp
+
+    r = Tk()
+    r.withdraw()
+    r.clipboard_clear()
+    r.clipboard_append('https://github.com/AayushShukla2006/tkinter-calculator')
+    r.update()
+    r.destroy()
+
+def gsc():
+    global vartemp, img
+
+    window = Toplevel(root)
+    window.title('GET SOURCE CODE')
+    window.geometry('350x450')
+    window.resizable(False, False)
+    window.grab_set()
+
+    Label(window, textvariable=vartemp, font=cfnt).pack()
+    bt = Button(window, text='Copy Link', command=copylink, font=cfnt)
+    bt.pack()
+
+    q = StringVar()
+    q.set('or you can also scan the QR code below.')
+    Label(window, textvariable=q, font=cfnt).pack()
+    label = Label(window, image=img).pack(padx=10, pady=10)
+
+def atp():
+    messagebox.showinfo('ABOUT THE PROJECT', 'Hey, I\'m Aayush Shukla and this is a small project - \'Tkinter Calculator\'. I  gave it the basic functionalities every calculator software has (with some known issues mentioned in my GitHub). I started working on this project on 11th of November, 2021 and completed it on 20th of November, 2021. I am not currently maintaining the source code but it will always be freely available on GitHub as an open-source project and will be always open to your contributions.')
+
 comwindow = Menu(menubar, tearoff=0)
-comwindow.add_command(label="Save Logs")
-comwindow.add_command(label="Quit", command=root.quit)
+comwindow.add_command(label="Quit", command=qclick)
 menubar.add_cascade(label="Commands", menu=comwindow)
 
 helpmenu = Menu(menubar, tearoff=0)
 helpmenu.add_command(label="About the buttons")
-helpmenu.add_command(label="About the project")
+helpmenu.add_command(label="About the project", command=atp)
 helpmenu.add_separator()
-helpmenu.add_command(label="Get source code")
+helpmenu.add_command(label="Get source code", command=gsc)
 menubar.add_cascade(label="About", menu=helpmenu)
 
 segoe_font = tkFont.Font(family='Segoe UI', size=28)
@@ -91,7 +136,6 @@ def equals():
                     messagebox.showwarning('Out of digits', f'The answer cannot be printed as its length is greater than 10.\nAnswer is : {int(float(tempvar2))}')
                 else:
                     entry_text.set(int(float(tempvar2)))
-                    print(len(tempvar2))
             else:
                 entry_text.set(round(float(tempvar2), 5))
     except ValueError:
