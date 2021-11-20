@@ -1,9 +1,8 @@
-# TODO: Add mannual entry of operations functionality
-
 from tkinter import *
 from tkinter import font as tkFont
 from tkinter import messagebox, Toplevel
 from PIL import ImageTk, Image
+import webbrowser
 
 root = Tk()
 root.geometry('700x600')
@@ -11,6 +10,7 @@ root.grid_rowconfigure((0,1,2,3,4,5), weight=1)
 root.grid_columnconfigure((0,1,2,3), weight=1)
 root.title("CALCULATOR")
 root.resizable(False, False)
+root.option_add('*Dialog.msg.font', 'Segoe 11')
 
 vartemp = StringVar()
 vartemp.set('The source code is available on GitHub.\nPress the button below to copy the link.')
@@ -18,6 +18,9 @@ path = 'frame.png'
 img = ImageTk.PhotoImage(Image.open(path))
 
 menubar = Menu(root)
+
+new = 1
+url = 'https://github.com/AayushShukla2006/tkinter-calculator'
 
 cfnt = tkFont.Font(family='Segoe UI', size=11)
 
@@ -39,8 +42,11 @@ def copylink():
     r.update()
     r.destroy()
 
+def openlink():
+    webbrowser.open(url, new=new)
+
 def gsc():
-    global vartemp, img
+    global vartemp, img, url, new
 
     window = Toplevel(root)
     window.title('GET SOURCE CODE')
@@ -51,6 +57,8 @@ def gsc():
     Label(window, textvariable=vartemp, font=cfnt).pack()
     bt = Button(window, text='Copy Link', command=copylink, font=cfnt)
     bt.pack()
+    bt2 = Button(window, text='Open Link', command=openlink, font=cfnt)
+    bt2.pack()
 
     q = StringVar()
     q.set('or you can also scan the QR code below.')
@@ -58,7 +66,17 @@ def gsc():
     label = Label(window, image=img).pack(padx=10, pady=10)
 
 def atp():
-    messagebox.showinfo('ABOUT THE PROJECT', 'Hey, I\'m Aayush Shukla and this is a small project - \'Tkinter Calculator\'. I gave it the basic functionalities every calculator software has (with some known issues mentioned in my GitHub). I started working on this project on 11th of November, 2021 and completed it on 20th of November, 2021. I am not currently maintaining the source code but it will always be freely available on GitHub as an open-source project and will be always open to your contributions.')
+    window = Toplevel(root)
+    window.title('ABOUT THE PROJECT')
+    window.geometry('400x250')
+    window.resizable(False, False)
+    window.grab_set()
+
+    about = StringVar()
+    about.set('Hey, I\'m Aayush Shukla and this is a small project - \'Tkinter Calculator\'. I gave it the basic functionalities every calculator software has (with some known issues mentioned in my GitHub). I started working on this project on 11th of November, 2021 and completed it on 20th of November, 2021. I am not currently maintaining the source code but it will always be freely available on GitHub as an open-source project and will be always open to your contributions.')
+    Label(window, textvariable=about, wraplength=350, justify='left', font=cfnt).pack(padx=10, pady=20)
+
+    window.grab_set()
 
 comwindow = Menu(menubar, tearoff=0)
 comwindow.add_command(label="Quit", command=qclick)
